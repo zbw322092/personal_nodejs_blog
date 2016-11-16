@@ -8,3 +8,7 @@ exports.initalPage = function(req, res, next) {
 exports.author = function(req, res, next) {
 	res.send(req.params.name);
 }
+
+exports.apiRoute = function(req, res, next) {
+	res.send('it is api page');
+}
