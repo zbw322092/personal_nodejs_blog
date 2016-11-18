@@ -1,7 +1,19 @@
 var path = require('path');
 var express = require('express');
+var mongoose = require('mongoose');
 var app = express();
 var bodyParser = require('body-parser');
+
+mongoose.connect('mongodb://localhost/blog');
+var PostSchema = mongoose.Schema({
+	title: { type: String, required: true },
+	body: String,
+	tag: { type: String, enum:['POLITICS', 'ECONOMY', 'EDUCATION'] },
+	posted: { type: Date, default: Date.now }
+}, { collection: 'post'});
+
+var PostModel = mongoose.model('PostModel', PostSchema);
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -9,10 +21,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.post('/api/blogpost', function(req, res) {
-	console.log('Hello from create post serve');
-	console.log(req.body);
-	console.log(typeof req.body); // object
-	res.send('A blog post is created!');
+	var post = req.body;
+	PostModel
+		.create(post)
+		.then(
+			function(postObj) {
+				res.send('A blog post is created!');
+			},
+			function(error) {
+				res.sendStatus(400);
+			}
+		);
 });
 
 app.listen(3000, function() {
