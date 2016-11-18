@@ -1,14 +1,20 @@
+var path = require('path');
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
-var indexRoute = require('./routes/index.js');
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.all('/api/*', indexRoute.apiRoute)
-app.get('/', indexRoute.initalPage);
-app.get('/author/:name', indexRoute.author);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
-app.locals.title = 'my app';
+app.post('/api/blogpost', function(req, res) {
+	console.log('Hello from create post serve');
+	console.log(req.body);
+	console.log(typeof req.body); // object
+	res.send('A blog post is created!');
+});
 
-console.log('app.locals: ', app.locals);
-
-app.listen(3000);
+app.listen(3000, function() {
+	console.log('Server is listening on port 3000');
+});

@@ -1,31 +1,27 @@
 {
-  "name": "bowen_nodejs_blog",
+  "name": "personal_nodejs_blog",
   "version": "1.0.0",
-  "description": "a personal blog built with MEAN Stack",
+  "description": "NodeJS blog",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbw322092/personal_nodejs_blog.git"
+  },
   "keywords": [
-    "Nodejs",
-    "MEAN_Stack"
+    "NodeJS"
   ],
   "author": "Bowen Zhong",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbw322092/personal_nodejs_blog/issues"
+  },
+  "homepage": "https://github.com/zbw322092/personal_nodejs_blog#readme",
   "dependencies": {
-    "config-lite": "^1.5.0",
-    "connect-flash": "^0.1.1",
-    "connect-mongo": "^1.3.2",
-    "ejs": "^2.5.2",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "express-formidable": "^1.0.0",
-    "express-session": "^1.14.2",
-    "express-winston": "^2.0.0",
-    "marked": "^0.3.6",
-    "moment": "^2.16.0",
-    "mongolass": "^2.3.2",
-    "objectid-to-timestamp": "^1.3.0",
-    "sha1": "^1.1.1",
-    "winston": "^2.3.0"
+    "mongoose": "^4.6.8"
   }
 }

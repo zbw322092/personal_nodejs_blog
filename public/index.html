@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="personal_blog_app">
+<head>
+	<title>Nodejs Blog App</title>
+</head>
+<body ng-controller="blogCtrl">
+	<h1>An Express nodejs personal blog</h1>
+	<form>
+		<input ng-model="post.title" type="text" placeholder="Blog Title">
+		<input ng-model="post.content" type="textarea" placeholder="Blog Content">
+		<button ng-click="createPost(post)">Submit</button>
+	</form>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+	<script type="text/javascript" src="./scripts/blogCtrl.js"></script>
+</body>
+</html>
