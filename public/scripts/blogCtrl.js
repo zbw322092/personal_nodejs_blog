@@ -21,6 +21,15 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 
 
 	$scope.createPost = function(post) {
-		$http.post('/api/blogpost', post);
+		$http
+			.post('/api/blogpost', post)
+			.then(
+				function(result) {
+					getAllPosts()
+				},
+				function(error) {
+					console.log('Get posts error');
+				}
+			);
 	}
 }]);
