@@ -14,7 +14,19 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 			.get('/api/blogpost')
 			.then(
 				function(posts) {
-					$scope.posts = posts;
+					$scope.posts = posts.data;
+				}
+			);
+	}
+
+	$scope.deletePost = function(postId) {
+		$http.delete('/api/blogpost/'+postId)
+			.then(
+				function(result) {
+					getAllPosts()
+				},
+				function() {
+					console.log('Delete posts error');
 				}
 			);
 	}

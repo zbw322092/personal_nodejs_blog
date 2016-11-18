@@ -50,6 +50,19 @@ app.post('/api/blogpost', function(req, res) {
 		);
 });
 
+app.delete('/api/blogpost/:id', function(req, res) {
+	var postId = req.params.id;
+	PostModel.remove({_id: postId})
+		.then(
+			function(status) {
+				res.sendStatus(200);
+			},
+			function(error) {
+				res.sendStatus(400);
+			}
+		);
+});
+
 app.listen(3000, function() {
 	console.log('Server is listening on port 3000');
 });

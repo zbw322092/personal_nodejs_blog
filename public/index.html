@@ -11,7 +11,18 @@
 		<button ng-click="createPost(post)">Submit</button>
 	</form>
 
-	{{posts}}
+	<div ng-repeat="onepost in posts">
+		<h2>
+			{{onepost.title}}
+		</h2>
+		<button ng-click="deletePost([onepost._id])">Remove</button>
+		<em>{{onepost.posted}}<em>
+		<p>{{onepost.body}}</p>
+		<hr>
+		<br>
+	</div>
+
+	<!-- {{posts}} -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
 	<script type="text/javascript" src="./scripts/blogCtrl.js"></script>
