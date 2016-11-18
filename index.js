@@ -20,6 +20,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
+
+
+app.get('/api/blogpost', function(req, res) {
+	PostModel
+		.find()
+		.then(
+			function(posts) {
+				res.json(posts);
+			},
+			function(error) {
+				res.sendStatus(400);
+			}
+		);
+});
+
+
 app.post('/api/blogpost', function(req, res) {
 	var post = req.body;
 	PostModel
