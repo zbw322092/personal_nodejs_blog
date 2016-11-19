@@ -35,6 +35,19 @@ app.get('/api/blogpost', function(req, res) {
 		);
 });
 
+app.get('/api/blogpost/:id', function(req, res) {
+	var postId = req.params.id;
+	PostModel
+		.findById({_id: postId})
+		.then(
+			function(post) {
+				res.json(post);
+			},
+			function(error) {
+				res.sendStatus(400);
+			}
+		);
+});
 
 app.post('/api/blogpost', function(req, res) {
 	var post = req.body;
@@ -43,6 +56,24 @@ app.post('/api/blogpost', function(req, res) {
 		.then(
 			function(postObj) {
 				res.send('A blog post is created!');
+			},
+			function(error) {
+				res.sendStatus(400);
+			}
+		);
+});
+
+app.put('/api/blogpost/:id', function(req, res) {
+	var postId = req.params.id;
+	var post = req.body;
+	PostModel
+		.update({_id: postId}, {
+			title: post.title,
+			body: post.body
+		})
+		.then(
+			function(status) {
+				res.sendStatus(200);
 			},
 			function(error) {
 				res.sendStatus(400);
