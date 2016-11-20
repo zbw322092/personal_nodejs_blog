@@ -1,21 +1,26 @@
 <h1>sign up now!!</h1>
 
 <div>name: </div>
-<input type='text'>
+<input type='text' ng-model="signUpInfo.name">
 
 <div>password: </div>
-<input type='text'>
+<input type='text' ng-model="signUpInfo.password">
+<div>re-enter password: </div>
+<input type='text' ng-model="signUpInfo.repassword">
 
 <div>Gender: </div>
-<input type="radio" name="gender" id="male">
+<input type="radio" name="gender" id="male" value="Male" ng-model="signUpInfo.gender">
 <label for="male">Male</label>
 <br>
-<input type="radio" name="gender" id="female">
+<input type="radio" name="gender" id="female" value="Female" ng-model="signUpInfo.gender">
 <label for="female">Female</label>
 <br>
-<input type="radio" name="gender" id="other">
+<input type="radio" name="gender" id="other" value="Perfer not to say" ng-model="signUpInfo.gender">
 <label for="other">Perfer not to say</label>
 <br>
 
 <div>bio</div>
-<input type="text">
+<input type="text" ng-model="signUpInfo.bio">
+
+<br>
+<button ng-click="signUp()">Sign Up</button>

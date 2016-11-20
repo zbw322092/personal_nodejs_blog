@@ -1,5 +1,3 @@
-// var app = angular.module('personal_blog_app', []);
-
 app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 	
 	initialPage();
