@@ -3,6 +3,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 mongoose.connect('mongodb://localhost/blog');
 var PostSchema = mongoose.Schema({
@@ -12,10 +14,17 @@ var PostSchema = mongoose.Schema({
 	posted: { type: Date, default: Date.now }
 }, { collection: 'post'});
 
+var SignUpSchema = mongoose.Schema({
+	username: { type: String, required: true, index: true, unique: true },
+	password: { type: String, require: true },
+	gender: { type: String, enum: ['Male', 'Female', 'Perfer not to say'] },
+	bio: { type: String }
+});
+
 var PostModel = mongoose.model('PostModel', PostSchema);
+var SignUpSchema = mongoose.model('SignUpModel', SignUpSchema);
 
-
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + ''));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -94,6 +103,39 @@ app.delete('/api/blogpost/:id', function(req, res) {
 		);
 });
 
+app.use(session({
+	name: 'BowenPersonalBlog',
+	secret: 'personal blog',
+	cookie: {
+		maxAge: 24 * 3600 * 1000 * 30
+	},
+	store: new MongoStore({
+		mongooseConnection: mongoose.connection
+	})
+}));
+
 app.listen(3000, function() {
 	console.log('Server is listening on port 3000');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

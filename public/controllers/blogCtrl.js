@@ -1,4 +1,4 @@
-var app = angular.module('personal_blog_app', []);
+// var app = angular.module('personal_blog_app', []);
 
 app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 	
