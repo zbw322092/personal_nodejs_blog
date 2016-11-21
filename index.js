@@ -9,6 +9,8 @@ var MongoStore = require('connect-mongo')(session);
 var signUpRoute = require('./routes/signup');
 var signInRoute = require('./routes/signin');
 
+var checkLogin = require('./middlewares/check.js').checkLogin;
+
 mongoose.connect('mongodb://localhost/blog');
 var PostSchema = mongoose.Schema({
 	title: { type: String, required: true },
@@ -54,7 +56,7 @@ app.get('/api/blogpost/:id', function(req, res) {
 		);
 });
 
-app.post('/api/blogpost', function(req, res) {
+app.post('/api/blogpost', checkLogin, function(req, res) {
 	var post = req.body;
 	PostModel
 		.create(post)
@@ -109,6 +111,16 @@ app.use(session({
 		mongooseConnection: mongoose.connection
 	})
 }));
+
+app.use('/test',
+	function(req, res, next) {
+		if (req.session) {
+			res.redirect('/#/sign_up')	;
+		}
+		
+	}
+);
+
 
 
 /* -------------------------- */

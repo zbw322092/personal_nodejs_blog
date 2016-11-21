@@ -51,9 +51,8 @@ router.post('/', function(req, res, next) {
 			function(result) {
 				delete result.password;
 				req.session.user = result;
-				// res.redirect('/');
 				console.log('there is a result: ', result);
-				res.sendStatus(200);
+				res.redirect('/');
 			},
 			function(error) {
 				console.log('there is an error: ', error.message);
