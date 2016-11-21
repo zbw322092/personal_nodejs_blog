@@ -56,7 +56,12 @@ router.post('/', function(req, res, next) {
 				res.sendStatus(200);
 			},
 			function(error) {
-				console.log('there is an error: ', error);
+				console.log('there is an error: ', error.message);
+				if (error.message.match('E11000 duplicate key')) {
+					console.log('用户名已经被占用');
+					return res.redirect('/signup');
+				}
+				res.sendStatus(400);
 			}
 		);
 

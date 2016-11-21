@@ -5,7 +5,9 @@ var app = express();
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+
 var signUpRoute = require('./routes/signup');
+var signInRoute = require('./routes/signin');
 
 mongoose.connect('mongodb://localhost/blog');
 var PostSchema = mongoose.Schema({
@@ -111,6 +113,7 @@ app.use(session({
 
 /* -------------------------- */
 app.use('/signup', signUpRoute);
+app.use('/signin', signInRoute)
 
 app.listen(3000, function() {
 	console.log('Server is listening on port 3000');

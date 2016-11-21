@@ -13,5 +13,10 @@ module.exports = {
 	createAcoount: function(data) {
 		return SignUpModel
 			.create(data);
+	},
+
+	getUserByName: function(data) {
+		return SignUpModel
+			.findOne({username: data});
 	}
 }
