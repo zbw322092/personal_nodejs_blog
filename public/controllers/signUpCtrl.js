@@ -1,5 +1,14 @@
 app.controller('signUpCtrl', function($scope, $http) {
 	$scope.signUp = function() {
-		console.log($scope.signUpInfo);
+		$http
+			.post('/signup', $scope.signUpInfo)
+			.then(
+				function(result) {
+
+				},
+				function(error) {
+
+				}
+			);
 	}
 });

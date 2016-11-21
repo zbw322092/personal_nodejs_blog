@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var signUpRoute = require('./routes/signup');
 
 mongoose.connect('mongodb://localhost/blog');
 var PostSchema = mongoose.Schema({
@@ -14,15 +15,8 @@ var PostSchema = mongoose.Schema({
 	posted: { type: Date, default: Date.now }
 }, { collection: 'post'});
 
-var SignUpSchema = mongoose.Schema({
-	username: { type: String, required: true, index: true, unique: true },
-	password: { type: String, require: true },
-	gender: { type: String, enum: ['Male', 'Female', 'Perfer not to say'] },
-	bio: { type: String }
-});
 
 var PostModel = mongoose.model('PostModel', PostSchema);
-var SignUpSchema = mongoose.model('SignUpModel', SignUpSchema);
 
 app.use(express.static(__dirname + ''));
 
@@ -113,6 +107,10 @@ app.use(session({
 		mongooseConnection: mongoose.connection
 	})
 }));
+
+
+/* -------------------------- */
+app.use('/signup', signUpRoute);
 
 app.listen(3000, function() {
 	console.log('Server is listening on port 3000');
