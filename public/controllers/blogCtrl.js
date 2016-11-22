@@ -10,6 +10,13 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 			.get('/api/blogpost')
 			.then(
 				function(posts) {
+					var i;
+					for(i in posts.data) {
+						posts.data[i].formattedDate = 
+							posts.data[i].posted.slice(0, 10) + ' ' +
+							posts.data[i].posted.slice(11, 19);
+					}
+					
 					$scope.posts = posts.data;
 				}
 			);

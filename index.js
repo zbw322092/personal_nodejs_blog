@@ -39,7 +39,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.get('/api/blogpost', function(req, res) {
-	// console.log(req.session);
 	PostModel
 		.find()
 		.then(

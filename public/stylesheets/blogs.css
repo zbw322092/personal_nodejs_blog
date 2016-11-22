@@ -1,0 +1,8 @@
+section {
+	padding: 50px;
+	border-bottom: 1px solid #eee;
+}
+
+section em {
+	font-size: 12px;
+}

@@ -1,4 +1,4 @@
-<form action="#/sign_in">
+<!-- <form action="#/sign_in">
   <input type="submit" value="Sign In">
 </form>
 
@@ -8,23 +8,28 @@
 
 <form ng-click="signOut()">
   <input type="submit" value="Sign Out">
-</form>
+</form> -->
 
-<form>
-    <input ng-model="post.title" type="text" placeholder="Blog Title">
-    <br>
-    <textarea ng-model="post.body" placeholder="Blog Content"></textarea>
-    <button ng-click="createPost(post)">Submit</button>
-    <button ng-click="updatePost(post)">Update</button>
-</form>
-<div ng-repeat="onepost in posts">
-   <h2>
-		{{onepost.title}}
-	</h2>
-    <button ng-click="editPost([onepost._id])">Edit</button>
-    <button ng-click="deletePost([onepost._id])">Remove</button>
-    <em>{{onepost.posted}}<em>
-	<p>{{onepost.body}}</p>
-	<hr>
-	<br>
+<div class="blogs">
+  <!-- <form>
+      <input ng-model="post.title" type="text" placeholder="Blog Title">
+      <br>
+      <textarea ng-model="post.body" placeholder="Blog Content"></textarea>
+      <button ng-click="createPost(post)">Submit</button>
+      <button ng-click="updatePost(post)">Update</button>
+  </form> -->
+  <div ng-repeat="onepost in posts">
+    <section>
+       <h1>
+        {{onepost.title}}
+      </h1>
+
+      <!-- <button ng-click="editPost([onepost._id])">Edit</button>
+      <button ng-click="deletePost([onepost._id])">Remove</button> -->
+      
+      <em class="post-date">{{onepost.formattedDate}}</em>
+      <p>{{onepost.body}}</p>
+    </section>
+  </div>  
+
 </div>
