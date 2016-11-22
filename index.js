@@ -8,6 +8,7 @@ var MongoStore = require('connect-mongo')(session);
 
 var signUpRoute = require('./routes/signup');
 var signInRoute = require('./routes/signin');
+var signOutRoute = require('./routes/signout');
 
 var checkLogin = require('./middlewares/check.js').checkLogin;
 
@@ -114,7 +115,8 @@ app.delete('/api/blogpost/:id', function(req, res) {
 
 /* -------------------------- */
 app.use('/signup', signUpRoute);
-app.use('/signin', signInRoute)
+app.use('/signin', signInRoute);
+app.use('/signOut', signOutRoute);
 
 app.listen(3000, function() {
 	console.log('Server is listening on port 3000');

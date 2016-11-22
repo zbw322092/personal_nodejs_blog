@@ -72,9 +72,25 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 	};
 
 
-	$scope.goSignIn = function() {
-		
+	$scope.signOut = function() {
+		$http.get('/signOut')
+			.then(
+				function(result) {
+					if (result.data === '登出成功') {
+						window.alert('登出成功');
+					}
+				},
+				function(error) {
+
+				}
+			);
 	}
 
 
 }]);
+
+
+
+
+
+
