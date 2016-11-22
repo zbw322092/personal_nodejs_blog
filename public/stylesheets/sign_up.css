@@ -1,0 +1,29 @@
+.sign-up-form {
+	border: none;
+}
+
+.sign-up-form div {
+	margin-top: 15px;
+}
+
+.sign-up-form input {
+	margin-top: 5px;
+}
+
+.sign-up-bio-textarea {
+	width: 100%;
+	height: 100px;
+	margin-top: 10px;
+	resize: none;
+	padding:3px;
+	border: 1px solid #cccccc;
+}
+
+.sign-up-form button {
+	margin-top: 40px;
+	width: 80px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+}

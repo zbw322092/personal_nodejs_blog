@@ -1,3 +1,20 @@
 .sign-in-form {
 	border: none;
 }
+
+.sign-in-password {
+	margin-top: 15px;
+}
+
+.sign-in-form input {
+	margin-top: 5px;
+}
+
+.sign-in-button {
+	margin-top: 40px;
+	width: 80px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+}
