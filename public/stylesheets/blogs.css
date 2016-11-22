@@ -1,8 +1,76 @@
+.user-icon {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 40px;
+	height: 40px;
+	background: url('../assets/user-login.png') no-repeat;
+	background-size: 100% 100%;
+	cursor:pointer;
+}
+
+.post-icon {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	cursor:pointer;
+}
+
+.post-edit {
+	background: url('../assets/edit-icon.png') no-repeat;
+	background-size: 100% 100%;
+	margin-left: 20px;
+}
+
+.post-delete {
+	background: url('../assets/delete-icon.png') no-repeat;
+	background-size: 100% 100%;
+	margin-left: 5px;
+}
+
+.post-delete {
+	display: inline-block;
+}
+
+
+.post-title {
+	width: 50%;
+	height: 20px;
+	border: 1px solid #cccccc;
+}
+
+.post-body {
+	width: 100%;
+	height: 100px;
+	margin-top: 10px;
+	resize: none;
+	padding:3px;
+	border: 1px solid #cccccc;
+}
+
+.post-button {
+	margin-top: 10px;
+	width: 80px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+}
+
+.post-update {
+	margin-left: 10px;
+}
+
 section {
 	padding: 50px;
 	border-bottom: 1px solid #eee;
 }
 
+section h1 {
+	display: inline-block;
+}
+
 section em {
+	display: block;
 	font-size: 12px;
 }

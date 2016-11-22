@@ -11,25 +11,32 @@
 </form> -->
 
 <div class="blogs">
-  <!-- <form>
-      <input ng-model="post.title" type="text" placeholder="Blog Title">
-      <br>
-      <textarea ng-model="post.body" placeholder="Blog Content"></textarea>
-      <button ng-click="createPost(post)">Submit</button>
-      <button ng-click="updatePost(post)">Update</button>
-  </form> -->
+
+  
+  <div class="user-icon" ng-click="signinOrSignout()"></div>
   <div ng-repeat="onepost in posts">
     <section>
-       <h1>
+      <h1>
         {{onepost.title}}
       </h1>
-
+      <div class="post-icon post-edit" ng-click="editPost([onepost._id])"></div>
+      <div class="post-icon post-delete" ng-click="deletePost([onepost._id])"></div>
       <!-- <button ng-click="editPost([onepost._id])">Edit</button>
       <button ng-click="deletePost([onepost._id])">Remove</button> -->
       
       <em class="post-date">{{onepost.formattedDate}}</em>
       <p>{{onepost.body}}</p>
     </section>
-  </div>  
+  </div>
+
+  <section>
+    <form>
+      <input class="post-title" ng-model="post.title" type="text" placeholder="Blog Title"><br>
+      <textarea class="post-body" ng-model="post.body" type="text" placeholder="Blog Content"></textarea>
+    </form>
+    <button class="post-button post-submit" ng-click="createPost(post)">Submit</button>
+    <button class="post-button post-update" ng-click="updatePost(post)">Update</button>    
+  </section>
+
 
 </div>

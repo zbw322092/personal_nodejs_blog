@@ -11,6 +11,7 @@ var signInRoute = require('./routes/signin');
 var signOutRoute = require('./routes/signout');
 
 var checkLogin = require('./middlewares/check.js').checkLogin;
+var checkNotLogin = require('./middlewares/check.js').checkNotLogin;
 
 mongoose.connect('mongodb://localhost/blog');
 var PostSchema = mongoose.Schema({
@@ -116,6 +117,8 @@ app.delete('/api/blogpost/:id', function(req, res) {
 app.use('/signup', signUpRoute);
 app.use('/signin', signInRoute);
 app.use('/signOut', signOutRoute);
+
+app.use('/sign_redirect', checkLogin, checkNotLogin);
 
 app.listen(3000, function() {
 	console.log('Server is listening on port 3000');

@@ -93,8 +93,40 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 			);
 	}
 
+	$scope.signinOrSignout = function() {
+		$http.get('/sign_redirect')
+			.then(
+				function(result) {
+					if (result.data === '未登录') {
+						window.location = 'http://localhost:3000/#/sign_in';
+					} else if (result.data === '已登录') {
+						$scope.signOut();
+					}
+				},
+				function(error) {
+					console.log('error happen: ', error);
+				}
+			);
+	}
+
 
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
