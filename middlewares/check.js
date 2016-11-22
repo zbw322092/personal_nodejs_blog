@@ -1,13 +1,14 @@
 module.exports = {
 	checkLogin: function(req, res, next) {
-		if (!req.session) {
+		if (!req.session.user) {
 			console.log('未登录');
 			res.send('未登录');
 		}
+		next();
 	},
 
 	checkNotLogin: function(req, res, next) {
-		if (req.session['user']) {
+		if (req.session.user) {
 			console.log('已登录');
 			return res.redirect('back');
 		}

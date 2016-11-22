@@ -21,7 +21,7 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 			.then(
 				function(result) {
 					if (result.data == '未登录') {
-						window.location = 'http://localhost:3000/#/sign_up';
+						window.location = 'http://localhost:3000/#/sign_in';
 					} else {
 						getAllPosts();	
 					}

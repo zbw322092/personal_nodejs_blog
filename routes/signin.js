@@ -9,12 +9,12 @@ var UserModel = require('../models/userModel.js');
 router.post('/', function(req, res, next) {
 	var username = req.body.name;
 	var password = req.body.password;
+	sess = req.session;
 
 	UserModel
 		.getUserByName(username)
 		.then(
 			function(result) {
-				console.log('I get an user: ', result);
 				if (!result) {
 					return res.send('用户不存在');
 				}
@@ -24,7 +24,8 @@ router.post('/', function(req, res, next) {
 				}
 
 				delete result.password;
-				req.session.user = result;
+				sess.user = result;
+				console.log(req.session);
 				res.send('登录成功');
 			},
 			function(error) {

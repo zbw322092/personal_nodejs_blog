@@ -19,6 +19,16 @@ var PostSchema = mongoose.Schema({
 	posted: { type: Date, default: Date.now }
 }, { collection: 'post'});
 
+app.use(session({
+	name: 'BowenPersonalBlog',
+	secret: 'personal blog',
+	cookie: {
+		maxAge: 24 * 3600 * 1000 * 30
+	},
+	store: new MongoStore({
+		mongooseConnection: mongoose.connection
+	})
+}));
 
 var PostModel = mongoose.model('PostModel', PostSchema);
 
@@ -27,9 +37,8 @@ app.use(express.static(__dirname + ''));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-
-
 app.get('/api/blogpost', function(req, res) {
+	// console.log(req.session);
 	PostModel
 		.find()
 		.then(
@@ -100,26 +109,6 @@ app.delete('/api/blogpost/:id', function(req, res) {
 			}
 		);
 });
-
-app.use(session({
-	name: 'BowenPersonalBlog',
-	secret: 'personal blog',
-	cookie: {
-		maxAge: 24 * 3600 * 1000 * 30
-	},
-	store: new MongoStore({
-		mongooseConnection: mongoose.connection
-	})
-}));
-
-app.use('/test',
-	function(req, res, next) {
-		if (req.session) {
-			res.redirect('/#/sign_up')	;
-		}
-		
-	}
-);
 
 
 

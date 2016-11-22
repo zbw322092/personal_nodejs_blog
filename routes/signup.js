@@ -52,7 +52,7 @@ router.post('/', function(req, res, next) {
 				delete result.password;
 				req.session.user = result;
 				console.log('there is a result: ', result);
-				res.redirect('/');
+				res.send('注册成功');
 			},
 			function(error) {
 				console.log('there is an error: ', error.message);
