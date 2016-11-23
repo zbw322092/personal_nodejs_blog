@@ -30,11 +30,11 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 					if (result.data == '未登录') {
 						window.location = 'http://localhost:3000/#/sign_in';
 					} else {
-						getAllPosts();	
+						getAllPosts();
 					}
 				},
 				function(error) {
-					console.log('Get posts error');
+					console.log('Create posts error');
 				}
 			);
 	};
@@ -44,7 +44,11 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 			.get('/api/blogpost/'+postId)
 			.then(
 				function(post) {
-					$scope.post = post.data;
+					if (post.data === "未登录") {
+						window.alert("未登录");
+					} else {
+						$scope.post = post.data;
+					}
 				},
 				function(error) {
 					console.log('Edit posts error');
@@ -70,7 +74,12 @@ app.controller('blogCtrl', ['$scope', '$http', function($scope, $http) {
 		$http.delete('/api/blogpost/'+postId)
 			.then(
 				function(result) {
-					getAllPosts()
+					if (result.data === '未登录') {
+						window.alert("未登录");
+					} else {
+						getAllPosts();
+					}
+					
 				},
 				function(error) {
 					console.log('Delete posts error');

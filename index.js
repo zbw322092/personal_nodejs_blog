@@ -6,20 +6,16 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
+mongoose.connect('mongodb://localhost/blog');
+
+
 var signUpRoute = require('./routes/signup');
 var signInRoute = require('./routes/signin');
 var signOutRoute = require('./routes/signout');
+var postRoute = require('./routes/post');
 
 var checkLogin = require('./middlewares/check.js').checkLogin;
 var checkNotLogin = require('./middlewares/check.js').checkNotLogin;
-
-mongoose.connect('mongodb://localhost/blog');
-var PostSchema = mongoose.Schema({
-	title: { type: String, required: true },
-	body: String,
-	tag: { type: String, enum:['POLITICS', 'ECONOMY', 'EDUCATION'] },
-	posted: { type: Date, default: Date.now }
-}, { collection: 'post'});
 
 app.use(session({
 	name: 'BowenPersonalBlog',
@@ -32,91 +28,23 @@ app.use(session({
 	})
 }));
 
-var PostModel = mongoose.model('PostModel', PostSchema);
-
 app.use(express.static(__dirname + ''));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-app.get('/api/blogpost', function(req, res) {
-	PostModel
-		.find()
-		.then(
-			function(posts) {
-				res.json(posts);
-			},
-			function(error) {
-				res.sendStatus(400);
-			}
-		);
-});
-
-app.get('/api/blogpost/:id', function(req, res) {
-	var postId = req.params.id;
-	PostModel
-		.findById({_id: postId})
-		.then(
-			function(post) {
-				res.json(post);
-			},
-			function(error) {
-				res.sendStatus(400);
-			}
-		);
-});
-
-app.post('/api/blogpost', checkLogin, function(req, res) {
-	var post = req.body;
-	PostModel
-		.create(post)
-		.then(
-			function(postObj) {
-				res.send('A blog post is created!');
-			},
-			function(error) {
-				res.sendStatus(400);
-			}
-		);
-});
-
-app.put('/api/blogpost/:id', function(req, res) {
-	var postId = req.params.id;
-	var post = req.body;
-	PostModel
-		.update({_id: postId}, {
-			title: post.title,
-			body: post.body
-		})
-		.then(
-			function(status) {
-				res.sendStatus(200);
-			},
-			function(error) {
-				res.sendStatus(400);
-			}
-		);
-});
-
-app.delete('/api/blogpost/:id', function(req, res) {
-	var postId = req.params.id;
-	PostModel.remove({_id: postId})
-		.then(
-			function(status) {
-				res.sendStatus(200);
-			},
-			function(error) {
-				res.sendStatus(400);
-			}
-		);
-});
+/* ------------- Post ------------- */
+app.get('/api/blogpost', postRoute);
+app.get('/api/blogpost/:id', checkLogin, postRoute);
+app.post('/api/blogpost', checkLogin, postRoute);
+app.put('/api/blogpost/:id', checkLogin, postRoute);
+app.delete('/api/blogpost/:id', checkLogin, postRoute);
 
 
-
-/* -------------------------- */
+/* -------------- User ------------ */
 app.use('/signup', signUpRoute);
-app.use('/signin', signInRoute);
-app.use('/signOut', signOutRoute);
+app.use('/signin', checkNotLogin, signInRoute);
+app.use('/signOut', checkLogin, signOutRoute);
 
 app.use('/sign_redirect', checkLogin, checkNotLogin);
 

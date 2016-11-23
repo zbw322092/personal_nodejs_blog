@@ -21,19 +21,19 @@ router.post('/', function(req, res, next) {
 		if (['Male', 'Female', 'Perfer not to say'].indexOf(gender) === -1) {
 			throw new Error('性别只能是 Male, Female 或 Perfer not to say');
 		}
-    if (!(bio.length >= 1 && bio.length <= 30)) {
-      throw new Error('个人简介请限制在 1-30 个字符');
-    }
-    if (password.length < 6) {
-      throw new Error('密码至少 6 个字符');
-    }
-    if (password !== repassword) {
-      throw new Error('两次输入密码不一致');
-    }
+	    if (!(bio.length >= 1 && bio.length <= 30)) {
+	      throw new Error('个人简介请限制在 1-30 个字符');
+	    }
+	    if (password.length < 6) {
+	      throw new Error('密码至少 6 个字符');
+	    }
+	    if (password !== repassword) {
+	      throw new Error('两次输入密码不一致');
+	    }
 	} catch(e) {
 		// res.send(e.message);
 		console.log(e);
-		return res.redirect('/signup');
+		return res.send(e);
 	}
 
 	password = sha1(password);
@@ -58,7 +58,7 @@ router.post('/', function(req, res, next) {
 				console.log('there is an error: ', error.message);
 				if (error.message.match('E11000 duplicate key')) {
 					console.log('用户名已经被占用');
-					return res.redirect('/signup');
+					return res.send('用户名已经被占用');
 				}
 				res.sendStatus(400);
 			}
